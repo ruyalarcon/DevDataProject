@@ -1,0 +1,67 @@
+---
+title       : The exponential simulator
+subtitle    : Interactive statistics for learning
+author      : Rosa Alarcon
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Why bother?
+
+
+- Statistics concepts are hard to grasp if delivered only as facts and information.
+- Interactive simulations allow students to understand the properties of the represented phenomena in an intuitive way
+- Statistics are becoming more important both in the job and everyday areas due to the massive availability of data
+- Statistics can be fun!
+
+--- &twocol 
+
+## The exponential function simulator
+*** =left
+
+   ![APicture](./assets/img/controls.png)
+
+
+*** =right
+```{r echo = FALSE}
+      library(ggplot2)
+      mns=NULL
+      for (i in 1 : 1000) mns = c(mns, mean(rexp(48, 0.2)))
+  
+      g <- ggplot(data.frame(mns), aes(x =mns))
+      g <- g + geom_histogram(aes(y=..density..), colour="black", fill = "white", binwidth = 0.3)
+      g <- g + geom_density(colour="blue", size=1)
+      g <- g + stat_function(fun = dnorm, arg = list(mean = (1/0.2),sd = sd(mns)))
+      g <- g + geom_vline(xintercept = 1/0.2, colour="green", linetype="longdash")
+      g <- g + geom_vline(xintercept = mean(mns), colour="red", linetype="longdash")
+      
+      print(g)
+```
+
+
+--- .class #id 
+
+## Playing with controls
+
+- The exponential simulator allows students to explore the effect of parameters such as the **number of averages of exponential distribution** and its relation to a theoretical distribution.
+
+- Students can also configure the number of simulations to understand the effect of such number and the closeness (or not) to the theoretical distribution.
+
+- Finally, the theoretical mean (green vertical line), the experimental mean (red vertical line), as well as the normal distribution (black curve) with mean equal to the theoretical mean can be rendered to demostrated the properties of the theoretical function and its relation to the experiment.
+
+--- .class #id 
+
+## Goal
+
+- With a set of similar simulations we can facilitate students learning regarding statistics and develop an intuitive understanding of the laws and properties of various phenomenas.
+
+- The product will be deployed online, with free access from students worlwide.
+
+- Product sustainability will be achieved by publicity related to students interests.
+
+- Let's make statistics fun!
